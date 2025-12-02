@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryWeave | Interactive Storytelling Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>StoryWeave</span>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="navHome">
+                    <i class="fas fa-home"></i> Home
+                </button>
+                <button class="btn btn-primary" id="navCreate">
+                    <i class="fas fa-plus"></i> Create
+                </button>
+                <button class="btn btn-secondary" id="navLibrary">
+                    <i class="fas fa-book"></i> Library
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <div class="hero">
+                <h1>Create Interactive Stories</h1>
+                <p>Build choose-your-own-adventure stories with branching paths, multiple endings, and beautiful design.</p>
+                <div class="flex gap-4 justify-center">
+                    <button class="btn btn-primary" id="startCreating">
+                        <i class="fas fa-magic"></i> Start Creating
+                    </button>
+                    <button class="btn btn-secondary" id="tryDemo">
+                        <i class="fas fa-play"></i> Try Demo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Branching Stories</h3>
+                    <p>Create multiple story paths with different choices and endings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Beautiful Design</h3>
+                    <p>Modern interface with smooth animations and vibrant colors.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <h3>Save Locally</h3>
+                    <p>Your stories are saved in your browser - no account needed!</p>
+                </div>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="creator-container">
+                <h2 class="text-center mb-4">Quick Start</h2>
+                <div class="form-group">
+                    <label class="form-label">Story Title</label>
+                    <input type="text" class="form-control" id="quickTitle" placeholder="My Amazing Adventure">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Opening Scene</label>
+                    <textarea class="form-control" id="quickContent" rows="4">You wake up in a mysterious forest. Three paths lie before you. Each leads to a different destiny...</textarea>
+                </div>
+                <button class="btn btn-primary w-100" id="createQuickStory">
+                    <i class="fas fa-bolt"></i> Create & Start
+                </button>
+            </div>
+        </div>
+
+        <!-- Creator Page -->
+        <div id="creatorPage" class="page">
+            <div class="flex justify-between items-center mb-4">
+                <h2>Story Creator</h2>
+                <button class="btn btn-secondary" id="backHome">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+            <div class="creator-container">
+                <div class="form-group">
+                    <label class="form-label">Story Title</label>
+                    <input type="text" class="form-control" id="storyTitle" placeholder="Enter story title...">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Current Chapter</label>
+                    <textarea class="form-control" id="chapterContent" rows="6" placeholder="Write your story here...">You stand at a crossroads. Each path leads to a different adventure. What will you choose?</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Add Choices</label>
+                    <div class="choices-container" id="choicesContainer">
+                        <div class="choice-input">
+                            <input type="text" class="form-control" placeholder="Go left through the dark forest">
+                            <button class="btn btn-danger btn-small remove-choice"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <div class="choice-input">
+                            <input type="text" class="form-control" placeholder="Follow the river path">
+                            <button class="btn btn-danger btn-small remove-choice"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary mt-2" id="addChoice">
+                        <i class="fas fa-plus"></i> Add Choice
+                    </button>
+                </div>
+                
+                <div class="flex gap-4 mt-4">
+                    <button class="btn btn-primary" id="saveChapter">
+                        <i class="fas fa-save"></i> Save Chapter
+                    </button>
+                    <button class="btn btn-success" id="previewStory">
+                        <i class="fas fa-eye"></i> Preview
+                    </button>
+                </div>
+            </div>
+
+            <!-- Story Chapters -->
+            <div class="creator-container mt-4">
+                <h3>Story Chapters</h3>
+                <div id="chaptersList" class="mt-2">
+                    <p class="text-muted">No chapters yet. Start by saving your first chapter!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reader Page -->
+        <div id="readerPage" class="page">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 id="currentStoryTitle">The Mysterious Forest</h2>
+                    <small>Chapter <span id="chapterNumber">1</span></small>
+                </div>
+                <div class="flex gap-2">
+                    <button class="btn btn-secondary" id="backToCreator">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-secondary" id="restartStory">
+                        <i class="fas fa-redo"></i> Restart
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reader-container">
+                <div class="chapter-content">
+                    <div class="story-text" id="storyText">
+                        Loading story...
+                    </div>
+                    
+                    <div class="choices-grid" id="choicesGrid">
+                        <!-- Choices will be added here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progress -->
+            <div class="creator-container mt-4">
+                <div class="flex justify-between mb-2">
+                    <span>Progress</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Library Page -->
+        <div id="libraryPage" class="page">
+            <h2 class="text-center mb-4">Your Stories</h2>
+            
+            <div class="stories-grid" id="storiesGrid">
+                <!-- Stories will be loaded here -->
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-secondary" id="clearStories">
+                    <i class="fas fa-trash"></i> Clear All Stories
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <style>
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .w-100 {
+            width: 100%;
+        }
+        
+        .text-muted {
+            color: var(--gray);
+        }
+    </style>
+</body>
+</html>
